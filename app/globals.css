@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background-start: #1a1a1a;
+  --background-end: #2d2d2d;
+  --card-background: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --accent-color: #3b82f6;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* This ensures anchored content isn't hidden behind the navbar */
+}
+
+body {
+  background: linear-gradient(to bottom, var(--background-start), var(--background-end));
+  color: var(--text-primary);
+  min-height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-start);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4a4a4a;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a5a5a;
+}
