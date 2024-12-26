@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface Project {
@@ -10,38 +10,43 @@ interface Project {
   link: string;
 }
 
+// Static project data
+const projectsData: Project[] = [
+  {
+    id: '1',
+    title: 'AI-Powered Chat Application',
+    description: 'A real-time chat application with AI-powered features like message translation, sentiment analysis, and smart replies.',
+    technologies: ['React', 'TypeScript', 'WebSocket', 'Natural Language Processing'],
+    link: 'https://github.com/yourusername/chat-app'
+  },
+  {
+    id: '2',
+    title: 'E-commerce Platform',
+    description: 'A modern e-commerce platform with features like product search, cart management, and secure payment processing.',
+    technologies: ['Next.js', 'Tailwind CSS', 'Stripe', 'Redux'],
+    link: 'https://github.com/yourusername/ecommerce'
+  },
+  {
+    id: '3',
+    title: 'Weather Dashboard',
+    description: 'A weather dashboard that shows current conditions and forecasts for multiple locations with interactive maps.',
+    technologies: ['React', 'OpenWeather API', 'Mapbox', 'Chart.js'],
+    link: 'https://github.com/yourusername/weather-app'
+  }
+];
+
 export default function Projects() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchProjects();
-  }, []);
+  // Handle admin navigation
+  if (searchQuery.toLowerCase() === 'admin') {
+    router.push('/admin');
+    return null;
+  }
 
-  const fetchProjects = async () => {
-    try {
-      const response = await fetch('/api/projects');
-      if (!response.ok) throw new Error('Failed to fetch projects');
-      const data = await response.json();
-      setProjects(data);
-    } catch (err) {
-      setError('Error loading projects');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (searchQuery.toLowerCase() === 'admin') {
-      router.push('/admin');
-    }
-  }, [searchQuery, router]);
-
-  const filteredProjects = projects.filter(project => {
+  // Filter projects based on search query
+  const filteredProjects = projectsData.filter(project => {
     const searchTerm = searchQuery.toLowerCase();
     if (searchTerm === 'admin') return false;
     return (
@@ -50,36 +55,6 @@ export default function Projects() {
       project.technologies.some(tech => tech.toLowerCase().includes(searchTerm))
     );
   });
-
-  if (loading) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="animate-pulse space-y-8">
-          <div className="h-12 bg-gray-700 rounded w-3/4"></div>
-          <div className="h-8 bg-gray-700 rounded"></div>
-          <div className="space-y-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-gray-700 rounded-xl p-6 space-y-4">
-                <div className="h-6 bg-gray-600 rounded w-1/2"></div>
-                <div className="h-4 bg-gray-600 rounded w-full"></div>
-                <div className="h-4 bg-gray-600 rounded w-3/4"></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-4 text-red-400">
-          {error}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-4xl mx-auto">

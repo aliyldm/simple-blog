@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
     <div className="max-w-4xl mx-auto">
@@ -7,7 +5,7 @@ export default function Home() {
         Welcome to My Blog
       </h1>
       <p className="text-lg text-gray-300 mb-12">
-        Hi! I'm a developer sharing my journey and projects. Feel free to explore my work and learn more about me.
+        Hi! I&apos;m a developer sharing my journey and projects. Feel free to explore my work and learn more about me.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-[#2a2a2a] p-8 rounded-xl shadow-lg border border-white/10 hover:border-blue-500/50 transition-colors">

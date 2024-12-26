@@ -9,7 +9,7 @@ export default function About() {
         <section className="bg-[#2a2a2a] p-8 rounded-xl border border-white/10">
           <h2 className="text-2xl font-bold mb-4 text-white">Introduction</h2>
           <p className="text-gray-300">
-            Welcome to my blog! I'm a passionate developer who loves to create and learn new things.
+            Welcome to my blog! I&apos;m a passionate developer who loves to create and learn new things.
             [Edit this section to tell your story]
           </p>
         </section>
